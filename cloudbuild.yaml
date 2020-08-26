@@ -11,7 +11,7 @@ steps:
 
   # [START tg-plan]
   - id: "tg plan"
-    name: "alpine/terragrunt:0.12.9"
+    name: "alpine/terragrunt:0.12.9-0.23.35"
     entrypoint: "sh"
     args:
       - "-c"
@@ -37,7 +37,7 @@ steps:
 
   # [START tg-apply]
   - id: "tg apply"
-    name: "alpine/terragrunt:0.12.9"
+    name: "alpine/terragrunt:0.12.9-0.23.35"
     entrypoint: "sh"
     args:
       - "-c"
