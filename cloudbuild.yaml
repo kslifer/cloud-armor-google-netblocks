@@ -44,7 +44,7 @@ steps:
       - |
         if [ -d "environments/$BRANCH_NAME/" ]; then
           cd environments/$BRANCH_NAME
-          terragrunt apply-all --auto-approve
+          terragrunt apply-all --auto-approve --terragrunt-non-interactive
         else
           echo "***************************** SKIPPING APPLYING *******************************"
           echo "Branch '$BRANCH_NAME' does not represent an oficial environment."
