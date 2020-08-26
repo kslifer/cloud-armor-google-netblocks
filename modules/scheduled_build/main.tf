@@ -33,7 +33,7 @@ resource "google_cloudbuild_trigger" "github" {
     owner = var.github_owner
     name  = var.github_repo
     push {
-      branch = "master"
+      branch = ".*"
     }
   }
   filename = "cloudbuild.yaml"
