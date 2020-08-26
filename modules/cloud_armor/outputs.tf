@@ -7,9 +7,9 @@ output "google_cloud_cidr_blocks" {
 }
 
 output "google_security_policy" {
-  value = resource.google_compute_security_policy.google.self_link
+  value = google_compute_security_policy.google.self_link
 }
 
 output "google_cloud_security_policy" {
-  value = resource.google_compute_security_policy.google_cloud.self_link
+  value = google_compute_security_policy.google_cloud.self_link
 }
