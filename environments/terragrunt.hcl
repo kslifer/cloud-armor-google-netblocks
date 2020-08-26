@@ -16,8 +16,10 @@ generate "provider" {
   if_exists = "overwrite_terragrunt"
   contents = <<EOF
 provider "google" {
-  version   = "> 3.24"
+  version   = "~> 3.24"
 }
-provider "google-beta" {}
+provider "google-beta" {
+  version   = "~>  3.36"
+}
 EOF
 }
