@@ -19,7 +19,7 @@ provider "google" {
   version   = "~> 3.24"
 }
 provider "google-beta" {
-  version   = "~>  3.36"
+  version   = "~>  3.35"
 }
 EOF
 }
