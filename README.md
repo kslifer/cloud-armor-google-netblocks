@@ -9,8 +9,12 @@ The policies will whitelist [Google](https://support.google.com/a/answer/60764?h
 - Google Cloud Project
 - Billing enabled
 - Terraform service account with at least the following permissions:
-    - ...
-    - ...
+    - (create cloud build trigger)
+    - (create cloud scheduler job)
+    - (create service accounts)
+    - (enable APIs)
+    - (create cloud Armor policies/rules)
+    - (probably more I forgot about but it'll hit me eventually...)
 - Google Cloud Storage
 
 ## Installation
