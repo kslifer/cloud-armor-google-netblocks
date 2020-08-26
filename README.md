@@ -51,7 +51,8 @@ I don't plan on keeping up with this. It was more of an experimental thing becau
 - Change a lot of the tfvars to come from the Cloud Build pipeline itself. This would allow the initial setup process to be:
     - Clone repo to your SCM
     - Create bucket
-    - Create Cloud Build Trigger (with bucket ID substitution)
+    - Create Cloud Build Trigger (with bucket ID and project ID substitutions)
+- Completely remove the whole 'branch = environment' idea that Google uses in it's example. It adds unnecesary complexity.
 - Have Cloud Build Trigger after a commit to the repo _only_ to remove the need for the Cloud Scheduler. This would  reduce cost a bit since Github actions are free for public repos. It'd also reduce the number of calls to Cloud Build - reducing cost a bit more.
 - Remove the [scheduled_build](./modules/scheduled_build) module because it'd be unnecessary
 - Get rid of Terragrunt (since at that point it's not necessary because bucket would be defined in the Cloud Build trigger)
