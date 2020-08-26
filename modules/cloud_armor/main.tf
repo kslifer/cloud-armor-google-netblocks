@@ -9,6 +9,8 @@ data "google_netblock_ip_ranges" "google_cloud" {
 
 # Cloud Armor Security Policies
 resource "google_compute_security_policy" "google" {
+  project = var.project
+
   name        = "google-policy"
   description = ""
 
@@ -48,6 +50,7 @@ resource "google_compute_security_policy" "google" {
 }
 
 resource "google_compute_security_policy" "google_cloud" {
+  project     = var.project
   name        = "google-cloud-policy"
   description = ""
 

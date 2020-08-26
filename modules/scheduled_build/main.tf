@@ -16,8 +16,8 @@ resource "google_project_service" "cloudscheduler_api" {
 # Ensure Cloud Build account has permissions
 resource "google_project_iam_member" "project" {
   project = var.project
-  role   = "roles/editor"
-  member = "serviceAccount:${data.google_project.project.number}@cloudbuild.gserviceaccount.com"
+  role    = "roles/editor"
+  member  = "serviceAccount:${data.google_project.project.number}@cloudbuild.gserviceaccount.com"
 
   depends_on = [google_project_service.cloudbuild_api]
 }
@@ -25,9 +25,9 @@ resource "google_project_iam_member" "project" {
 # Setup Cloud Build trigger
 resource "google_cloudbuild_trigger" "github" {
   provider = google-beta
-  project = var.project
+  project  = var.project
 
-  name = "cloud-armor-http-tf-job-trigger"
+  name        = "cloud-armor-http-tf-job-trigger"
   description = "Cloud Armor HTTP Terraform job trigger"
   github {
     owner = var.github_owner
@@ -43,20 +43,20 @@ resource "google_cloudbuild_trigger" "github" {
 
 # Service Account and IAM for scheduler to use to hit the trigger
 resource "google_service_account" "scheduler_trigger" {
-  project = var.project
-  account_id   = "cloud-armor-scheduler-trigger"
+  project     = var.project
+  account_id  = "cloud-armor-scheduler-trigger"
   description = "Auto Cloud Armor trigger account for use by Cloud Scheduler"
 }
 resource "google_project_iam_member" "build_triggerer" {
   project = var.project
-  role   = "roles/cloudbuild.builds.editor"
-  member = "serviceAccount:${google_service_account.scheduler_trigger.email}"
+  role    = "roles/cloudbuild.builds.editor"
+  member  = "serviceAccount:${google_service_account.scheduler_trigger.email}"
 }
 
 # Setup Cloud Scheduler to hit the trigger
 resource "google_cloud_scheduler_job" "job" {
-  project = var.project
-  region = var.region
+  project  = var.project
+  region   = var.region
   provider = google-beta
 
   name             = "dev-cloud-armor-http-tf-job"
@@ -70,8 +70,8 @@ resource "google_cloud_scheduler_job" "job" {
     uri         = "https://cloudbuild.googleapis.com/v1/projects/${var.project}/triggers/${google_cloudbuild_trigger.github.trigger_id}:run"
     body        = base64encode("{\"branchName\":\"dev\"}")
 
-     oauth_token {
-       service_account_email = google_service_account.scheduler_trigger.email
-     }
+    oauth_token {
+      service_account_email = google_service_account.scheduler_trigger.email
+    }
   }
 }
