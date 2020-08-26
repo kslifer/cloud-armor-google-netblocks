@@ -59,8 +59,8 @@ resource "google_cloud_scheduler_job" "job" {
   region = var.region
   provider = google-beta
 
-  name             = "cloud-armor-http-tf-job"
-  description      = "Cloud Armor HTTP Terraform job"
+  name             = "dev-cloud-armor-http-tf-job"
+  description      = "Cloud Armor HTTP Terraform job for Dev environment"
   schedule         = var.schedule_cron
   time_zone        = "America/New_York"
   attempt_deadline = "320s"
@@ -68,7 +68,7 @@ resource "google_cloud_scheduler_job" "job" {
   http_target {
     http_method = "POST"
     uri         = "https://cloudbuild.googleapis.com/v1/projects/${var.project}/triggers/${google_cloudbuild_trigger.github.trigger_id}:run"
-    body        = base64encode("{\"branchName\":\"master\"}")
+    body        = base64encode("{\"branchName\":\"dev\"}")
 
      oauth_token {
        service_account_email = google_service_account.scheduler_trigger.email
