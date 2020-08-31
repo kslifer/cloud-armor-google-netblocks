@@ -7,10 +7,12 @@ data "google_project" "project" {
 resource "google_project_service" "cloudbuild_api" {
   project = var.project
   service = "cloudbuild.googleapis.com"
+  disable_on_destroy = false
 }
 resource "google_project_service" "cloudscheduler_api" {
   project = var.project
   service = "cloudscheduler.googleapis.com"
+  disable_on_destroy = false
 }
 
 # Ensure Cloud Build account has permissions
